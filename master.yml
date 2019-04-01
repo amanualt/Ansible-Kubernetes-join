@@ -1,0 +1,32 @@
+---
+
+- name: install package kubernetes 
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: install kubectl for master 
+  hosts: master
+  become: yes
+  roles:
+    - master
+
+- name: install kubectl for master 
+  hosts: master
+  become: yes
+  roles:
+    - cluster
+
+- name: show script join
+  hosts: master
+  become: yes
+  gather_facts: no
+  roles:
+    - get
+
+- name: worker join to master
+  hosts: workers
+  become: yes
+  roles:
+    - join
